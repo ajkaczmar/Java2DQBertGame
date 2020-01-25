@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/QBert.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/BallRed.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Scene.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/Sam.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/PlayField.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/ScoreTable.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/BallPurple.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Entity.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/scene/LevelPresentation.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Assets.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/HudInfo.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/BitmapFont.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/LevelInfo.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Baloon.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/scene/Instructions.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Display.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/scene/GameOver.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Background.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Constants.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Harmless.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/Coily.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Actor.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/scene/OLPresents.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Enemy.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Audio.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/BallGreen.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/scene/Level.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/SceneManager.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/Ugg.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/scene/Title.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Keyboard.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/Slick.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/infra/Hud.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/FlyingDisc.java</file>
+            <file>file:/D:/qbert/JavaQBert/src/br/ol/qbert/actor/Wrongway.java</file>
+        </group>
+    </open-files>
+</project-private>
