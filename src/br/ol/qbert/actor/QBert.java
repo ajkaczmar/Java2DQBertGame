@@ -82,6 +82,11 @@ public class QBert extends Actor {
             jumpY(1);
             jumped = true;
         }
+
+        // for debugging purposes
+        //if (Keyboard.isKeyPressed(KeyEvent.VK_S)) {
+        //    HudInfo.addScore(950);
+        //}
         
         if (jumped) {
             Audio.playSound("jump");

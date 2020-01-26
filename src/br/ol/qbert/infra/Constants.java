@@ -46,4 +46,9 @@ public class Constants {
     public static final String SCENE_LEVEL = "level";
     public static final String SCENE_GAME_OVER = "game_over";
     
+    // extra life
+    
+    public static final int SCORE_EXTRA_LIFE_1 = 8000;
+    public static final int SCORE_EXTRA_LIFE_2 = 14000;
+    
 }

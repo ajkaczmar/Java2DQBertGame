@@ -1,5 +1,7 @@
 package br.ol.qbert.infra;
 
+import static br.ol.qbert.infra.Constants.*;
+
 /**
  * HudInfo class.
  * 
@@ -15,10 +17,12 @@ public class HudInfo {
     public static int lives;
     public static int score;
     public static int hiscore;
+    public static int nextExtraLife;
     
     public static void reset() {
         lives = 4;
         score = 0;
+        nextExtraLife = SCORE_EXTRA_LIFE_1;
         LevelInfo.level = 1;
         LevelInfo.round = 1;
     }
@@ -27,6 +31,11 @@ public class HudInfo {
         score += point;
         if (score > hiscore) {
             hiscore = score;
+        }
+        if (score >= nextExtraLife) {
+            nextExtraLife += SCORE_EXTRA_LIFE_2;
+            lives++;
+            Audio.playSound("prize");
         }
     }
     
