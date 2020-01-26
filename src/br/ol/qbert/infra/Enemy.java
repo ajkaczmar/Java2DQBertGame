@@ -11,10 +11,10 @@ public class Enemy extends Actor {
     
     protected final QBert qbert;
     
-    public Enemy(Scene scene, Axis topAxis, QBert qbert, 
+    public Enemy(int id, Scene scene, Axis topAxis, QBert qbert, 
         int jumpWaitUntil, PlayField playField, int minLevelFrames) {
         
-        super(scene, topAxis, playField);
+        super(id, scene, topAxis, playField);
         this.qbert = qbert;
         this.jumpWaitUntil = jumpWaitUntil;
         this.minLevelFrames = minLevelFrames;

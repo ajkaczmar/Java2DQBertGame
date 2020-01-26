@@ -14,8 +14,10 @@ import static br.ol.qbert.infra.ScoreTable.*;
  */
 public class Slick extends Harmless {
     
-    public Slick(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.Z_AXIS, qbert, 40, playField, 1500);
+    private int avoidWait;
+    
+    public Slick(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.Z_AXIS, qbert, 40, playField, 900);
     }
 
     @Override
@@ -35,6 +37,16 @@ public class Slick extends Harmless {
         fall1(1, 1, 7, 0);
     }
     
+    @Override
+    public void onDead() {
+        avoidWait = (int) (600 + 300 * Math.random()) ;
+    }
+
+    @Override
+    public void updateDead() {
+        avoidWait--;
+    }
+   
     @Override
     public void updateIdle() {
         if (Math.random() < 0.5) {
@@ -56,5 +68,9 @@ public class Slick extends Harmless {
     public void onStepOnPlayfield() {
         playField.restoreFloor(location[0] >> 4, location[1] >> 4);
     }    
+
+    public boolean keepDead() {
+        return avoidWait > 0;
+    }
      
 }

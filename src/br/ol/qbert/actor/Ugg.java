@@ -12,8 +12,8 @@ import br.ol.qbert.infra.Scene;
  */
 public class Ugg extends Enemy {
     
-    public Ugg(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.Y_AXIS, qbert, 40, playField, 300);
+    public Ugg(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.Y_AXIS, qbert, 40, playField, 90);
     }
 
     @Override

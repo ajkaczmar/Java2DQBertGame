@@ -19,9 +19,11 @@ import br.ol.qbert.scene.Level;
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
 public class BallGreen extends Harmless {
-    
-    public BallGreen(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.Z_AXIS, qbert, 50, playField, 1200);
+
+    private int avoidWait;
+
+    public BallGreen(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.Z_AXIS, qbert, 50, playField, 1200);
     }
 
     @Override
@@ -39,6 +41,16 @@ public class BallGreen extends Harmless {
     @Override
     public void reset() {
         fall1b(0);
+    }
+
+    @Override
+    public void onDead() {
+        avoidWait = (int) (300 + 300 * Math.random()) ;
+    }
+
+    @Override
+    public void updateDead() {
+        avoidWait--;
     }
     
     @Override
@@ -61,5 +73,9 @@ public class BallGreen extends Harmless {
         kill(false);
         HudInfo.addScore(SCORE_GREEN_BALL_CAPTURED);
     }
-     
+    
+    public boolean keepDead() {
+        return avoidWait > 0;
+    }
+    
 }

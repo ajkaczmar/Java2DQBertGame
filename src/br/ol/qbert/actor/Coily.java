@@ -17,8 +17,8 @@ public class Coily extends Enemy {
     // in this implementation, coily has priority to be revived
     protected int reviveTime;
     
-    public Coily(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.Z_AXIS, qbert, 40, playField, 15);
+    public Coily(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.Z_AXIS, qbert, 40, playField, 15);
     }
 
     @Override

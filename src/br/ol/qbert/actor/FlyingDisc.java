@@ -16,8 +16,8 @@ public class FlyingDisc extends Actor {
     public int x;
     public int y;
     
-    public FlyingDisc(Scene scene, PlayField playField, int x, int y) {
-        super(scene, Axis.Z_AXIS, playField);
+    public FlyingDisc(int id, Scene scene, PlayField playField, int x, int y) {
+        super(id, scene, Axis.Z_AXIS, playField);
         this.x = x;
         this.y = y;
     }

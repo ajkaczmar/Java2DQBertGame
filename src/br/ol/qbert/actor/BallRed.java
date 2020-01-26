@@ -12,8 +12,8 @@ import br.ol.qbert.infra.Scene;
  */
 public class BallRed extends Enemy {
 
-    public BallRed(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.Z_AXIS, qbert, 50, playField, 0);
+    public BallRed(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.Z_AXIS, qbert, 50, playField, 0);
     }
 
     @Override

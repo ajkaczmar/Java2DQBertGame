@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class Actor extends Entity {
     
+    protected int id;
+    
     public static final int[] JUMP_TABLE = 
         { 16, 18, 21, 23, 24, 24, 24, 24, 23, 21, 19, 16, 13, 9, 5, 0 };
 
@@ -61,8 +63,9 @@ public class Actor extends Entity {
     protected List<Frame> frames = new ArrayList<>();
     protected int currentFrame;
     
-    public Actor(Scene scene, Axis topAxis, PlayField playField) {
+    public Actor(int id,Scene scene, Axis topAxis, PlayField playField) {
         super(scene);
+        this.id = id;
         int[][] axisInfo = { { 1, 2, 0 }, { 2, 0, 1 }, { 0, 1, 2 } };
         this.upAxis = topAxis;
         xIndex = axisInfo[topAxis.ordinal()][0]; 
@@ -73,6 +76,10 @@ public class Actor extends Entity {
         location[zIndex] = 0xf0;
         target[zIndex] = 0xf0;
         state = State.DEAD;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void set(int l0, int l1, int l2, int t0, int t1, int t2) {

@@ -14,10 +14,10 @@ public class BallPurple extends Enemy {
     
     private final Coily coily;
     
-    public BallPurple(Scene scene, QBert qbert, 
+    public BallPurple(int id, Scene scene, QBert qbert, 
         PlayField playField, Coily coily) {
         
-        super(scene, Axis.Z_AXIS, qbert, 50, playField, 30);
+        super(id, scene, Axis.Z_AXIS, qbert, 50, playField, 30);
         this.coily = coily;
     }
 

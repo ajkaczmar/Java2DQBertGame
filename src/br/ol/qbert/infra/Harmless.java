@@ -11,10 +11,10 @@ public class Harmless extends Actor {
     
     protected final QBert qbert;
     
-    public Harmless(Scene scene, Axis topAxis, QBert qbert, 
+    public Harmless(int id, Scene scene, Axis topAxis, QBert qbert, 
         int jumpWaitUntil, PlayField playField, int minLevelFrames) {
         
-        super(scene, topAxis, playField);
+        super(id, scene, topAxis, playField);
         this.qbert = qbert;
         this.jumpWaitUntil = jumpWaitUntil;
         this.minLevelFrames = minLevelFrames;

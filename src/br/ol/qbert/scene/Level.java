@@ -24,6 +24,7 @@ import static br.ol.qbert.infra.Constants.*;
 import br.ol.qbert.infra.Hud;
 import br.ol.qbert.infra.HudInfo;
 import br.ol.qbert.infra.LevelInfo;
+import static br.ol.qbert.infra.LevelInfo.*;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,8 +47,20 @@ public class Level extends Scene {
     private Baloon baloon;
     private PlayField playField;
     private QBert qbert;
+    
     private Coily coily;
     private BallPurple ballPurple;
+    
+    private BallRed ballRed1;
+    private BallRed ballRed2;
+    private BallRed ballRed3;
+    
+    private Ugg ugg;
+    private Wrongway wrongway;
+    
+    private BallGreen ballGreen;
+    private Slick slick;
+    private Sam sam;
     
     private FlyingDisc flyingDisc1;
     private FlyingDisc flyingDisc2;
@@ -87,7 +100,7 @@ public class Level extends Scene {
         qbert.reset();
         // qbert.reset() doesn't ensure Q*Bert initial position
         qbert.set(1, 1, 7, 0, 0, 0); 
-        // TODO flying disc's
+        // flying disc's
         flyingDisc1.y = (int) (3 + 3 * Math.random());
         flyingDisc1.reset();
         flyingDisc2.y = (int) (6 + 2 * Math.random());
@@ -96,6 +109,19 @@ public class Level extends Scene {
         flyingDisc3.reset();
         flyingDisc4.x = (int) (6 + 2 * Math.random());
         flyingDisc4.reset();
+        // flying disc's available for this level ?
+        if (!LevelInfo.isCharacterAvailable(MASK_DISC_1)) {
+            flyingDisc1.kill(false);
+        }
+        if (!LevelInfo.isCharacterAvailable(MASK_DISC_2)) {
+            flyingDisc2.kill(false);
+        }
+        if (!LevelInfo.isCharacterAvailable(MASK_DISC_3)) {
+            flyingDisc3.kill(false);
+        }
+        if (!LevelInfo.isCharacterAvailable(MASK_DISC_4)) {
+            flyingDisc4.kill(false);
+        }
         killAllEnemiesAndHarmless();
         update();
         hud.refresh();
@@ -103,10 +129,10 @@ public class Level extends Scene {
     
     private void addAllEntities() {
         playField = new PlayField(this);
-        qbert = new QBert(this, playField);
+        qbert = new QBert(0, this, playField);
         baloon = new Baloon(this, qbert);
-        coily = new Coily(this, qbert, playField);
-        ballPurple = new BallPurple(this, qbert, playField, coily);
+        coily = new Coily(MASK_COILY, this, qbert, playField);
+        ballPurple = new BallPurple(MASK_COILY, this, qbert, playField, coily);
         
         entities.add(baloon);
         entities.add(playField);
@@ -118,23 +144,42 @@ public class Level extends Scene {
             entities.add(coily);
             entities.add(ballPurple);
 
-            entities.add(new Wrongway(this, qbert, playField));
-            entities.add(new Ugg(this, qbert, playField));
-            entities.add(new BallRed(this, qbert, playField));
-            entities.add(new BallRed(this, qbert, playField));
-            entities.add(new BallRed(this, qbert, playField));
+            entities.add(ballRed1 = 
+                new BallRed(MASK_RED_BALL_1, this, qbert, playField));
+            
+            entities.add(ballRed2 = 
+                new BallRed(MASK_RED_BALL_2, this, qbert, playField));
+            
+            entities.add(ballRed3 = 
+                new BallRed(MASK_RED_BALL_3,this, qbert, playField));
 
-            entities.add(new BallGreen(this, qbert, playField));
-            entities.add(new Slick(this, qbert, playField));
-            entities.add(new Sam(this, qbert, playField));
+            entities.add(wrongway = new Wrongway(
+                MASK_WRONG_WAY, this, qbert, playField));
+            
+            entities.add(ugg = new Ugg(MASK_UGG, this, qbert, playField));
+
+            entities.add(ballGreen = 
+                new BallGreen(MASK_GREEN_BALL, this, qbert, playField));
+            
+            entities.add(slick = 
+                new Slick(MASK_SLICK, this, qbert, playField));
+            
+            entities.add(sam = new Sam(MASK_SAM, this, qbert, playField));
         }
         
-        entities.add(flyingDisc1 = new FlyingDisc(this, playField, 0, 4));
-        entities.add(flyingDisc2 = new FlyingDisc(this, playField, 0, 6));
-        entities.add(flyingDisc3 = new FlyingDisc(this, playField, 3, 0));
-        entities.add(flyingDisc4 = new FlyingDisc(this, playField, 5, 0));             
+        entities.add(flyingDisc1 = 
+            new FlyingDisc(MASK_DISC_1, this, playField, 0, 4));
         
-        entities.add(hud=new Hud(this));
+        entities.add(flyingDisc2 = 
+                new FlyingDisc(MASK_DISC_2, this, playField, 0, 6));
+        
+        entities.add(flyingDisc3 = 
+                new FlyingDisc(MASK_DISC_3, this, playField, 3, 0));
+        
+        entities.add(flyingDisc4 = 
+                new FlyingDisc(MASK_DISC_4, this, playField, 5, 0));             
+        
+        entities.add(hud = new Hud(this));
     }
 
     private void initAllEntities() {
@@ -261,8 +306,15 @@ public class Level extends Scene {
                 if (!coily.equals(entity) && 
                     (entity instanceof Enemy || entity instanceof Harmless)) {
                     
+                    if ((entity.equals(slick) && slick.keepDead()) ||
+                        (entity.equals(sam) && sam.keepDead()) ||
+                        (entity.equals(ballGreen) && ballGreen.keepDead())) {
+                        continue;
+                    }
+        
                     Actor actor = (Actor) entity;
-                    if (frames > actor.getMinLevelFrames() && 
+                    if (frames > actor.getMinLevelFrames() &&
+                        LevelInfo.isCharacterAvailable(actor.getId()) &&
                         actor.getState() == Actor.State.DEAD) {
                         
                         actor.reset();

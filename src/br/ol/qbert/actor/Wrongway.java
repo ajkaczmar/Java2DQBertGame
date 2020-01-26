@@ -12,8 +12,8 @@ import br.ol.qbert.infra.Scene;
  */
 public class Wrongway extends Enemy {
     
-    public Wrongway(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.X_AXIS, qbert, 40, playField, 200);
+    public Wrongway(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.X_AXIS, qbert, 40, playField, 120);
     }
 
     @Override

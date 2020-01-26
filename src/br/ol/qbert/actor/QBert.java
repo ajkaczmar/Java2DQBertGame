@@ -17,8 +17,8 @@ import java.awt.event.KeyEvent;
  */
 public class QBert extends Actor {
 
-    public QBert(Scene scene, PlayField playField) {
-        super(scene, Axis.Z_AXIS, playField);
+    public QBert(int id, Scene scene, PlayField playField) {
+        super(id, scene, Axis.Z_AXIS, playField);
     }
 
     @Override

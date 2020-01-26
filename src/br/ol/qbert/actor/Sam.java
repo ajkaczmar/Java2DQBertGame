@@ -14,8 +14,10 @@ import static br.ol.qbert.infra.ScoreTable.*;
  */
 public class Sam extends Harmless {
     
-    public Sam(Scene scene, QBert qbert, PlayField playField) {
-        super(scene, Axis.Z_AXIS, qbert, 40, playField, 900);
+    private int avoidWait;
+    
+    public Sam(int id, Scene scene, QBert qbert, PlayField playField) {
+        super(id, scene, Axis.Z_AXIS, qbert, 40, playField, 600);
     }
 
     @Override
@@ -33,6 +35,16 @@ public class Sam extends Harmless {
     @Override
     public void reset() {
         fall1(1, 1, 7, 0);
+    }
+    
+    @Override
+    public void onDead() {
+        avoidWait = (int) (900 + 300 * Math.random()) ;
+    }
+
+    @Override
+    public void updateDead() {
+        avoidWait--;
     }
     
     @Override
@@ -56,5 +68,9 @@ public class Sam extends Harmless {
     public void onStepOnPlayfield() {
         playField.restoreFloor(location[0] >> 4, location[1] >> 4);
     }    
-     
+    
+    public boolean keepDead() {
+        return avoidWait > 0;
+    }
+    
 }
