@@ -54,6 +54,8 @@ public class Level extends Scene {
     private FlyingDisc flyingDisc3;
     private FlyingDisc flyingDisc4;
     
+    private Hud hud;
+    
     private int qbertInvicibleTime;
     private boolean gameCleared;
     private int gameClearedTime;
@@ -81,7 +83,7 @@ public class Level extends Scene {
         qbertInvicibleTime = 0;
         gameCleared = false;
         baloon.setVisible(false);
-        playField.reset(1);
+        playField.reset(LevelInfo.level);
         qbert.reset();
         // qbert.reset() doesn't ensure Q*Bert initial position
         qbert.set(1, 1, 7, 0, 0, 0); 
@@ -96,6 +98,7 @@ public class Level extends Scene {
         flyingDisc4.reset();
         killAllEnemiesAndHarmless();
         update();
+        hud.refresh();
     }
     
     private void addAllEntities() {
@@ -109,25 +112,29 @@ public class Level extends Scene {
         entities.add(playField);
         entities.add(qbert);
         
-        entities.add(coily);
-        entities.add(ballPurple);
+        boolean addCreatures = true;
         
-        entities.add(new Wrongway(this, qbert, playField));
-        entities.add(new Ugg(this, qbert, playField));
-        entities.add(new BallRed(this, qbert, playField));
-        entities.add(new BallRed(this, qbert, playField));
-        entities.add(new BallRed(this, qbert, playField));
-        
-        entities.add(new BallGreen(this, qbert, playField));
-        entities.add(new Slick(this, qbert, playField));
-        entities.add(new Sam(this, qbert, playField));
+        if (addCreatures) {
+            entities.add(coily);
+            entities.add(ballPurple);
+
+            entities.add(new Wrongway(this, qbert, playField));
+            entities.add(new Ugg(this, qbert, playField));
+            entities.add(new BallRed(this, qbert, playField));
+            entities.add(new BallRed(this, qbert, playField));
+            entities.add(new BallRed(this, qbert, playField));
+
+            entities.add(new BallGreen(this, qbert, playField));
+            entities.add(new Slick(this, qbert, playField));
+            entities.add(new Sam(this, qbert, playField));
+        }
         
         entities.add(flyingDisc1 = new FlyingDisc(this, playField, 0, 4));
         entities.add(flyingDisc2 = new FlyingDisc(this, playField, 0, 6));
         entities.add(flyingDisc3 = new FlyingDisc(this, playField, 3, 0));
         entities.add(flyingDisc4 = new FlyingDisc(this, playField, 5, 0));             
         
-        entities.add(new Hud(this));
+        entities.add(hud=new Hud(this));
     }
 
     private void initAllEntities() {
@@ -172,16 +179,13 @@ public class Level extends Scene {
     private void updateGameCleared() {
         playField.update();
         if (gameClearedTime-- < 0) {
-            // TODO: for now, all stages are the same.
-            //       implement more levels difficulty later.
-            LevelInfo.nextStage();
-            if (LevelInfo.level == 2) {
-                sceneManager.changeScene(SCENE_GAME_OVER);
-            }
-            else {
-                sceneManager.changeScene(SCENE_LEVEL_PRESENTATION);
-            }
+            nextStage();
         }
+    }
+    
+    public void nextStage() {
+        LevelInfo.nextStage();
+        sceneManager.changeScene(SCENE_LEVEL_PRESENTATION);
     }
     
     private void killAllEnemiesAndHarmless() {

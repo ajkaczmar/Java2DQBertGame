@@ -32,16 +32,20 @@ public class Hud extends Entity {
         }
         lives = Assets.getImage("lives");
     }
-
-    @Override
-    public void update() {
-        frames++;
+    
+    public void refresh() {
         if (level != LevelInfo.level || round != LevelInfo.round) {
             level = LevelInfo.level;
             round = LevelInfo.round;
+            int tmpLevel = level > 5 ? level % 5 : level;
             blockTarget = Assets.getImage(
-                "block_target_" + level + "_" + round);
+                "block_target_" + tmpLevel + "_" + round);
         }
+    }
+    
+    @Override
+    public void update() {
+        frames++;
     }
 
     @Override
@@ -51,8 +55,8 @@ public class Hud extends Entity {
         BitmapFont.drawText(g, "CHANGE TO:", 3, 6);
         BitmapFont.drawText(g, "=" + HudInfo.lives, 4, 10);
 
-        BitmapFont.drawText(g, "LEVEL:" + LevelInfo.level, 23, 6);
-        BitmapFont.drawText(g, "ROUND:" + LevelInfo.round, 23, 7);
+        BitmapFont.drawText(g, "LEVEL:" + level, 23, 6);
+        BitmapFont.drawText(g, "ROUND:" + round, 23, 7);
         
         g.drawImage(player[(frames >> 2) & 3], 24, 32, null);
         g.drawImage(changeTo[(frames >> 2) % 3], 24, 64, null);

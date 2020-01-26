@@ -35,6 +35,9 @@ public class LevelInfo {
         if (round > 4) {
             round = 1;
             level++;
+            if (level > 9) {
+                level = 9;
+            }
         }
     }
     
