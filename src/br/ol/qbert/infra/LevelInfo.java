@@ -150,7 +150,7 @@ public class LevelInfo {
     public static boolean isCharacterAvailable(int characterMask) {
         int available;
         if (level > 5) {
-            available = AVAILABLE_CHARACTERS[6][0];
+            available = AVAILABLE_CHARACTERS[5][0];
         }
         else {
             available = AVAILABLE_CHARACTERS[level - 1][round - 1];

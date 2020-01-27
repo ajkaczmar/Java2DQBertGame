@@ -51,5 +51,6 @@ public class HudInfo {
             hiscoreStr.length() - 7, hiscoreStr.length());
         
         return hiscoreStr;
-    }    
+    }
+
 }

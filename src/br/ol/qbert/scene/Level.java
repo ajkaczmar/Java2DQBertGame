@@ -20,11 +20,14 @@ import br.ol.qbert.actor.Slick;
 import br.ol.qbert.actor.Ugg;
 import br.ol.qbert.actor.Wrongway;
 import static br.ol.qbert.infra.Actor.State.*;
+import br.ol.qbert.infra.BitmapFont;
 import static br.ol.qbert.infra.Constants.*;
 import br.ol.qbert.infra.Hud;
 import br.ol.qbert.infra.HudInfo;
 import br.ol.qbert.infra.LevelInfo;
 import static br.ol.qbert.infra.LevelInfo.*;
+import br.ol.qbert.infra.ScoreTable;
+import static br.ol.qbert.infra.ScoreTable.*;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +76,8 @@ public class Level extends Scene {
     private boolean gameCleared;
     private int gameClearedTime;
     
+    private boolean bonusCompletingRoundVisible;
+    
     public Level(SceneManager sceneManager) {
         super(sceneManager);
     }
@@ -95,6 +100,7 @@ public class Level extends Scene {
         deadWaitTime = 0;
         qbertInvicibleTime = 0;
         gameCleared = false;
+        bonusCompletingRoundVisible = false;
         baloon.setVisible(false);
         playField.reset(LevelInfo.level);
         qbert.reset();
@@ -205,7 +211,7 @@ public class Level extends Scene {
             killAllEnemiesAndHarmless();
             playField.blink();
             gameCleared = true;
-            gameClearedTime = 150;
+            gameClearedTime = 200;
             Audio.playMusic("clear");
             return;
         }
@@ -223,9 +229,37 @@ public class Level extends Scene {
 
     private void updateGameCleared() {
         playField.update();
-        if (gameClearedTime-- < 0) {
+        if (gameClearedTime <= 0) {
             nextStage();
         }
+        else if (gameClearedTime == 50 && flyingDisc4.getState() != DEAD) {
+            flyingDisc4.kill(false);
+            HudInfo.addScore(SCORE_UNUSED_DISC_END_ROUND);
+            Audio.playSound("unused_disc");
+        }
+        else if (gameClearedTime == 55 && flyingDisc3.getState() != DEAD) {
+            flyingDisc3.kill(false);
+            HudInfo.addScore(SCORE_UNUSED_DISC_END_ROUND);
+            Audio.playSound("unused_disc");
+        }
+        else if (gameClearedTime == 60 && flyingDisc2.getState() != DEAD) {
+            flyingDisc2.kill(false);
+            HudInfo.addScore(SCORE_UNUSED_DISC_END_ROUND);
+            Audio.playSound("unused_disc");
+        }
+        else if (gameClearedTime == 65 && flyingDisc1.getState() != DEAD) {
+            flyingDisc1.kill(false);
+            HudInfo.addScore(SCORE_UNUSED_DISC_END_ROUND);
+            Audio.playSound("unused_disc");
+        }
+        else if (gameClearedTime == 130) {
+            HudInfo.addScore(ScoreTable.getScoreBonusCompletingRound());
+        }
+        
+        bonusCompletingRoundVisible = 
+            gameClearedTime >= 80 && gameClearedTime <= 130;
+        
+        gameClearedTime--;
     }
     
     public void nextStage() {
@@ -370,6 +404,10 @@ public class Level extends Scene {
                 entity.draw(g);
             }
         });
+        if (bonusCompletingRoundVisible) {
+            BitmapFont.drawText(g, 
+                "BONUS " + ScoreTable.getScoreBonusCompletingRound(), 11, 2);
+        }
     }
 
     // when Q*Bert catches green ball.

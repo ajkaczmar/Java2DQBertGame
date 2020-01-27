@@ -7,7 +7,6 @@ import br.ol.qbert.infra.Keyboard;
 import br.ol.qbert.infra.PlayField;
 import br.ol.qbert.infra.Scene;
 import static br.ol.qbert.infra.ScoreTable.*;
-import br.ol.qbert.scene.Level;
 import java.awt.event.KeyEvent;
 
 /**
