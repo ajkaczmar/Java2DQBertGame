@@ -40,11 +40,15 @@ public class FlyingDisc extends Actor {
     
     @Override
     public void updateIdle() {
-        frameIndex += 8;
-        currentFrame = (frameIndex >> 4) % 4;
+        updateAnimation();
         updateRelativeZAxis();
     }
-
+    
+    private void updateAnimation() {
+        frameIndex += 8;
+        currentFrame = (frameIndex >> 4) % 4;
+    }
+    
     @Override
     public void updateScreenPosition() {
         spx = 128 - location[0] + location[1];
@@ -56,6 +60,8 @@ public class FlyingDisc extends Actor {
 
     @Override
     protected void updateFlyingDisc() {
+        updateAnimation();
+        
         if (y > 0){
             location[xIndex] += 2;
         }
