@@ -188,7 +188,8 @@ public class Actor extends Entity {
             
             // check flying disc
             if (upAxis == Z_AXIS && scene instanceof br.ol.qbert.scene.Level && 
-                ((br.ol.qbert.scene.Level) scene).isOnFlyingDisc(col, row)) {
+                ((br.ol.qbert.scene.Level) scene).isOnFlyingDisc(
+                    this, col, row)) {
                 
                 liftFlyingDiscX = col;
                 liftFlyingDiscY = row;

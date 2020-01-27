@@ -426,7 +426,10 @@ public class Level extends Scene {
         return qbertInvicibleTime > 0;
     }
 
-    public boolean isOnFlyingDisc(int x, int y) {
+    public boolean isOnFlyingDisc(Actor actor, int x, int y) {
+        if (!actor.equals(qbert)) {
+            return false;
+        }
         for (Entity entity : entities) {
             if (entity instanceof FlyingDisc) {
                 FlyingDisc flyingDisc = (FlyingDisc) entity;
