@@ -14,6 +14,8 @@ import br.ol.qbert.scene.LevelPresentation;
 import br.ol.qbert.scene.OLPresents;
 import br.ol.qbert.scene.Title;
 import br.ol.qbert.scene.YouDidIt;
+import java.awt.Color;
+import java.awt.Composite;
 
 /**
  * SceneManager class.
@@ -32,6 +34,7 @@ public class SceneManager {
     private int fadeValue;
     private int fadeStatus;
     private int waitBetweenFade = 40;
+    private int flashValue;
     
     public SceneManager() {
         background = new Background();
@@ -115,11 +118,22 @@ public class SceneManager {
                 currentScene.update();
             }
         }
+        
+        if (flashValue > 0) {
+            flashValue -= 2;
+        }
     }
     
     public void draw(Graphics2D g) {
         g.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         background.draw(g);
+        if (flashValue > 0) {
+            Composite compositeOriginal = g.getComposite();
+            g.setComposite(ALPHAS[flashValue]);
+            g.setColor(Color.GREEN);
+            g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            g.setComposite(compositeOriginal);
+        }
         if (currentScene != null) {
             if (fadeStatus != 0) {
                 g.setComposite(ALPHAS[fadeValue]);
@@ -137,6 +151,10 @@ public class SceneManager {
         fadeStatus = 1;
         fadeValue = 20;
         this.waitBetweenFade = waitBetweenFade;
+    }
+    
+    public void flash() {
+        flashValue = 16;
     }
     
 }

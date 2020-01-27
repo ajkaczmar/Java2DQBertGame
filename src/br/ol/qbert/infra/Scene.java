@@ -14,6 +14,10 @@ public class Scene {
     public Scene(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+
+    public SceneManager getSceneManager() {
+        return sceneManager;
+    }
     
     public void start() {
         // implement your code here

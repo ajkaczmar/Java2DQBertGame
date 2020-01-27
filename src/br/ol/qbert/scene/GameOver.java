@@ -40,7 +40,8 @@ public class GameOver extends Scene {
                 sceneManager.changeScene(SCENE_YOU_DID_IT);
             }
             else {
-                sceneManager.changeScene(SCENE_TITLE);
+                ScoreInfo.newHiscorePlayerIndex = -1;
+                sceneManager.changeScene(SCENE_HISCORES);
             }
         }
         gameOverLength = Math.min(frames >> 2, 10);

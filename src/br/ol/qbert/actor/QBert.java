@@ -130,6 +130,7 @@ public class QBert extends Actor {
             }
             
             if (scene instanceof br.ol.qbert.scene.Level && jumpCount == 20) {
+                scene.getSceneManager().flash();
                 ((br.ol.qbert.scene.Level) scene).
                     liftFlyingDisc(liftFlyingDiscX, liftFlyingDiscY);
             }
@@ -140,7 +141,7 @@ public class QBert extends Actor {
     public void onFall() {
         Audio.playSound("qbert_fall");
     }
-    
+
     @Override
     public void onStepOnPlayfield() {
         if (playField.stepOn(location[0] >> 4, location[1] >> 4)) {

@@ -236,7 +236,7 @@ public class Actor extends Entity {
     public void onStepOnPlayfield() {
         // implement
     }
-    
+
     public void updateFalling2() {
         location[zIndex] -= fallingVelocity;
         location[xIndex] += target[xIndex];
