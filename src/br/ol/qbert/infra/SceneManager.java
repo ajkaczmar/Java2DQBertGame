@@ -7,11 +7,13 @@ import java.awt.Graphics2D;
 import java.util.HashMap;
 import java.util.Map;
 import br.ol.qbert.scene.GameOver;
+import br.ol.qbert.scene.Hiscores;
 import br.ol.qbert.scene.Instructions;
 import br.ol.qbert.scene.Level;
 import br.ol.qbert.scene.LevelPresentation;
 import br.ol.qbert.scene.OLPresents;
 import br.ol.qbert.scene.Title;
+import br.ol.qbert.scene.YouDidIt;
 
 /**
  * SceneManager class.
@@ -53,19 +55,23 @@ public class SceneManager {
         // start scene
         changeScene(SCENE_OL_PRESENTS);
         //changeScene(SCENE_TITLE);
+        //changeScene(SCENE_HISCORES);
         //changeScene(SCENE_INSTRUCTIONS);
         //changeScene(SCENE_LEVEL_PRESENTATION);
         //changeScene(SCENE_LEVEL);
         //changeScene(SCENE_GAME_OVER);
+        //changeScene(SCENE_YOU_DID_IT);
     }
     
     protected void createAllScenes() {
         scenes.put(SCENE_OL_PRESENTS, new OLPresents(this));
         scenes.put(SCENE_TITLE, new Title(this));
+        scenes.put(SCENE_HISCORES, new Hiscores(this));
         scenes.put(SCENE_INSTRUCTIONS, new Instructions(this));
         scenes.put(SCENE_LEVEL_PRESENTATION, new LevelPresentation(this));
         scenes.put(SCENE_LEVEL, new Level(this));
         scenes.put(SCENE_GAME_OVER, new GameOver(this));
+        scenes.put(SCENE_YOU_DID_IT, new YouDidIt(this));
     }
     
     protected void startAllScenes() {

@@ -26,8 +26,8 @@ import br.ol.qbert.infra.Hud;
 import br.ol.qbert.infra.HudInfo;
 import br.ol.qbert.infra.LevelInfo;
 import static br.ol.qbert.infra.LevelInfo.*;
-import br.ol.qbert.infra.ScoreTable;
-import static br.ol.qbert.infra.ScoreTable.*;
+import br.ol.qbert.infra.ScoreInfo;
+import static br.ol.qbert.infra.ScoreInfo.*;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -253,7 +253,7 @@ public class Level extends Scene {
             Audio.playSound("unused_disc");
         }
         else if (gameClearedTime == 130) {
-            HudInfo.addScore(ScoreTable.getScoreBonusCompletingRound());
+            HudInfo.addScore(ScoreInfo.getScoreBonusCompletingRound());
         }
         
         bonusCompletingRoundVisible = 
@@ -412,7 +412,7 @@ public class Level extends Scene {
         });
         if (bonusCompletingRoundVisible) {
             BitmapFont.drawText(g, 
-                "BONUS " + ScoreTable.getScoreBonusCompletingRound(), 11, 2);
+                "BONUS " + ScoreInfo.getScoreBonusCompletingRound(), 11, 2);
         }
     }
 

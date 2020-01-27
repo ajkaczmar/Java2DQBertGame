@@ -41,10 +41,12 @@ public class Constants {
     
     public static final String SCENE_OL_PRESENTS = "ol_presents";
     public static final String SCENE_TITLE = "title";
+    public static final String SCENE_HISCORES = "hiscores";
     public static final String SCENE_INSTRUCTIONS = "instructions";
     public static final String SCENE_LEVEL_PRESENTATION = "level_presentation";
     public static final String SCENE_LEVEL = "level";
     public static final String SCENE_GAME_OVER = "game_over";
+    public static final String SCENE_YOU_DID_IT = "you_did_it";
     
     // extra life
     

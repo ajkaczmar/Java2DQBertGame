@@ -8,6 +8,7 @@ import br.ol.qbert.infra.BitmapFont;
 import br.ol.qbert.infra.Scene;
 import static br.ol.qbert.infra.Constants.*;
 import br.ol.qbert.infra.HudInfo;
+import br.ol.qbert.infra.ScoreInfo;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,8 @@ public class Title extends Scene {
     private double prevY;
     private int baloonVisibleFrame;
     private boolean baloonVisible;
+    
+    private int instructionsOrHiscore;
     
     public Title(SceneManager sceneManager) {
         super(sceneManager);
@@ -73,8 +76,16 @@ public class Title extends Scene {
             return;
         }
         updateQBertFlyingDisc();
-        if (frames > 1000 || Keyboard.isKeyPressed(KeyEvent.VK_I)) {
+        if ((frames > 400 && instructionsOrHiscore == 0) || 
+            Keyboard.isKeyPressed(KeyEvent.VK_I)) {
+            
+            instructionsOrHiscore = 1;
             sceneManager.changeScene(SCENE_INSTRUCTIONS);
+        }
+        else if (frames > 400 && instructionsOrHiscore == 1) {
+            instructionsOrHiscore = 0;
+            ScoreInfo.newHiscorePlayerIndex = -1;
+            sceneManager.changeScene(SCENE_HISCORES);
         }
     }
 

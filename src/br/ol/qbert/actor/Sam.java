@@ -5,7 +5,7 @@ import br.ol.qbert.infra.Harmless;
 import br.ol.qbert.infra.Audio;
 import br.ol.qbert.infra.HudInfo;
 import br.ol.qbert.infra.Scene;
-import static br.ol.qbert.infra.ScoreTable.*;
+import static br.ol.qbert.infra.ScoreInfo.*;
 
 /**
  * Sam class.

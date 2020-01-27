@@ -5,6 +5,7 @@ import br.ol.qbert.infra.BitmapFont;
 import br.ol.qbert.infra.SceneManager;
 import br.ol.qbert.infra.Scene;
 import static br.ol.qbert.infra.Constants.*;
+import br.ol.qbert.infra.ScoreInfo;
 import java.awt.Graphics2D;
 
 /**
@@ -35,7 +36,12 @@ public class GameOver extends Scene {
     @Override
     public void update() {
         if (frames++ > 210) {
-            sceneManager.changeScene(SCENE_TITLE);
+            if (ScoreInfo.isHighscore()) {
+                sceneManager.changeScene(SCENE_YOU_DID_IT);
+            }
+            else {
+                sceneManager.changeScene(SCENE_TITLE);
+            }
         }
         gameOverLength = Math.min(frames >> 2, 10);
     }
