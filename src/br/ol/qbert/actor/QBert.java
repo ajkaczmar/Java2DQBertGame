@@ -7,6 +7,7 @@ import br.ol.qbert.infra.Keyboard;
 import br.ol.qbert.infra.PlayField;
 import br.ol.qbert.infra.Scene;
 import static br.ol.qbert.infra.ScoreTable.*;
+import br.ol.qbert.scene.Level;
 import java.awt.event.KeyEvent;
 
 /**
@@ -87,9 +88,9 @@ public class QBert extends Actor {
         //if (Keyboard.isKeyPressed(KeyEvent.VK_S)) {
         //    HudInfo.addScore(950);
         //}
-        //if (Keyboard.isKeyPressed(KeyEvent.VK_N)) {
-        //    ((Level) scene).nextStage();
-        //}
+        if (Keyboard.isKeyPressed(KeyEvent.VK_N)) {
+            ((Level) scene).nextStage();
+        }
         
         if (jumped) {
             Audio.playSound("jump");

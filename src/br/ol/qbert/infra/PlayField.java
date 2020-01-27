@@ -45,8 +45,15 @@ public class PlayField extends Entity {
     private int currentViewLevel;
     private int currentViewRound;
     
+    private int visibleHeight;
+           
     public PlayField(Scene scene) {
+        this(scene, 7);
+    }
+
+    public PlayField(Scene scene, int visibleHeight) {
         super(scene);
+        this.visibleHeight = visibleHeight;
         zOrder = -1;
     }
 
@@ -83,7 +90,15 @@ public class PlayField extends Entity {
         
         for (int y = 0; y < 7; y++) {
             for (int x = 0; x < 7; x++) {
+                
+                if (x + y > visibleHeight ||
+                    (x == visibleHeight && y != visibleHeight) ||
+                    (x != visibleHeight && y == visibleHeight)) {
+                    continue;
+                }
+                
                 if ((x + y) < 7) {
+                    
                     int z = (x << 4) + (y << 4);
                     int spx = 113 - (x << 4) + (y << 4);
                     int spy = 48 + (x << 3) + (y << 3) + z;

@@ -263,8 +263,14 @@ public class Level extends Scene {
     }
     
     public void nextStage() {
+        int currentState = LevelInfo.level;
         LevelInfo.nextStage();
-        sceneManager.changeScene(SCENE_LEVEL_PRESENTATION);
+        if (currentState != LevelInfo.level) {
+            sceneManager.changeScene(SCENE_LEVEL_PRESENTATION);
+        }
+        else {
+            sceneManager.changeScene(SCENE_LEVEL);
+        }
     }
     
     private void killAllEnemiesAndHarmless() {

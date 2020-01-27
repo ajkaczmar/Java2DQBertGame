@@ -103,6 +103,14 @@ public class Actor extends Entity {
         return minLevelFrames;
     }
 
+    public int getCurrentFrame() {
+        return currentFrame;
+    }
+
+    public void setCurrentFrame(int currentFrame) {
+        this.currentFrame = currentFrame;
+    }
+
     @Override
     public void update() {
         switch (state) {
