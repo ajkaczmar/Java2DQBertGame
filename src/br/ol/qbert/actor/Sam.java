@@ -10,6 +10,15 @@ import static br.ol.qbert.infra.ScoreInfo.*;
 /**
  * Sam class.
  * 
+ * Changes the color of the cube he touches.
+ * 
+ * Note: if the current level needs 2 jumps to obtain the target color,
+ *       and the current color is target color,
+ *       then Sam returns it to the intermediate color.
+ * 
+ * Referece:
+ * https://fontsinuse.com/uses/29256/qbert
+ * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
 public class Sam extends Harmless {
@@ -66,7 +75,7 @@ public class Sam extends Harmless {
     
     @Override
     public void onStepOnPlayfield() {
-        playField.restoreFloor(location[0] >> 4, location[1] >> 4);
+        playField.restoreFloor(location[0] >> 4, location[1] >> 4, 1);
     }    
     
     public boolean keepDead() {

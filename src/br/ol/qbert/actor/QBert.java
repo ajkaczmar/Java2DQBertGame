@@ -90,6 +90,12 @@ public class QBert extends Actor {
         //}
         //if (Keyboard.isKeyPressed(KeyEvent.VK_N)) {
         //    ((Level) scene).nextStage();
+        //    ((Level) scene).nextStage();
+        //    ((Level) scene).nextStage();
+        //    ((Level) scene).nextStage();
+        //}
+        //if (Keyboard.isKeyPressed(KeyEvent.VK_R)) {
+        //    ((Level) scene).nextStage();
         //}
         
         if (jumped) {
@@ -144,7 +150,11 @@ public class QBert extends Actor {
 
     @Override
     public void onStepOnPlayfield() {
-        if (playField.stepOn(location[0] >> 4, location[1] >> 4)) {
+        int scoreType = playField.stepOn(location[0] >> 4, location[1] >> 4);
+        if (scoreType == 1) {
+            HudInfo.addScore(SCORE_SQUARE_CHANGED_INTERMEDIATE_COLOR);
+        }
+        else if (scoreType == 2) {
             HudInfo.addScore(SCORE_SQUARE_CHANGED_TARGET_COLOR);
         }
     }

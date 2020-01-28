@@ -1,11 +1,13 @@
 package br.ol.qbert.actor;
 
+import static br.ol.qbert.infra.Actor.State.*;
 import br.ol.qbert.infra.Enemy;
 import br.ol.qbert.infra.PlayField;
 import br.ol.qbert.infra.Audio;
 import br.ol.qbert.infra.HudInfo;
 import br.ol.qbert.infra.Scene;
 import static br.ol.qbert.infra.ScoreInfo.*;
+import br.ol.qbert.scene.Level;
 
 /**
  * Coily class.
@@ -118,6 +120,10 @@ public class Coily extends Enemy {
     public void onFall() {
         Audio.playSound("coily_fall");
         HudInfo.addScore(SCORE_LURING_COILY_OVER_EDGE);
+        if (scene instanceof Level) {
+            Level level = (Level) scene;
+            level.killAllCreaturesExceptCoilyAndGreenBall();
+        }
     }
 
     @Override

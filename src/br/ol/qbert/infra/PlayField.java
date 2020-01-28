@@ -132,59 +132,75 @@ public class PlayField extends Entity {
         }
     }
 
-    public boolean stepOn(int x, int y) {
+    // return: 0 = no score
+    //         1 = intermediate color score
+    //         2 = target color score
+    public int stepOn(int x, int y) {
         if (x < 1 || x > 7 || y < 1 || y > 7) {
-            return false;
+            return 0;
         }
-        boolean stepOnResult;
+        int stepOnResult;
         switch (level) {
             case 1: stepOnResult = stepOnLevel1_2(x, y); break;
             case 2: stepOnResult = stepOnLevel1_2(x, y); break;
-            case 3: stepOnResult = stepOnLevel3_5(x, y, true, true, 1); break;
-            case 4: stepOnResult = stepOnLevel3_5(x, y, false, true, 1); break;
+            case 3: stepOnResult = stepOnLevel3_5(x, y, 1); break;
+            case 4: stepOnResult = stepOnLevel3_5(x, y, 1); break;
             case 5: 
             default:
-                stepOnResult = stepOnLevel3_5(x, y, false, true, 2); 
+                stepOnResult = stepOnLevel3_5(x, y, 2); 
                 break;
         }
         return stepOnResult;
     }
     
-    private boolean stepOnLevel1_2(int x, int y) {
+    private int calculateStepOnReturn(int x, int y) {
+        switch (requiredChangeCount) {
+            case 1:
+                return floorStates[y - 1][x - 1] == 0 ? 2 : 0;
+            case 2:
+                return 2 - floorStates[y - 1][x - 1];
+            default:
+                throw new RuntimeException(
+                    "it was supposed to not enter here !\n" + 
+                    "PlayField.calculateStepOnReturn() method.\n");
+        }
+    }
+    
+    private int stepOnLevel1_2(int x, int y) {
         if (floorStates[y - 1][x - 1] > 0) {
             floorStates[y - 1][x - 1]--;
             floorCount--;
-            return true;
+            return calculateStepOnReturn(x, y);
         }
-        return false;
+        return 0;
     }
 
-    private boolean stepOnLevel3_5(int x, int y, 
-        boolean score1, boolean score2, int restoreCount) {
-        
+    private int stepOnLevel3_5(int x, int y, int restoreCount) {
         switch (floorStates[y - 1][x - 1]) {
             case 2:
                 floorStates[y - 1][x - 1]--;
                 floorCount--;
-                return score2;
+                return calculateStepOnReturn(x, y);
             case 1:
                 floorStates[y - 1][x - 1]--;
                 floorCount--;
-                return score1;
+                return calculateStepOnReturn(x, y);
             case 0:
                 floorStates[y - 1][x - 1] += restoreCount;
                 floorCount += restoreCount;
-                return false;
+                return 0;
             default:
                 throw new RuntimeException(
                     "invalid value for stepOnLevel3_5() !");
         }
     }
 
-    public void restoreFloor(int x, int y) {
-        while (floorStates[y - 1][x - 1] < requiredChangeCount) {
-            floorStates[y - 1][x - 1]++;
-            floorCount++;
+    public void restoreFloor(int x, int y, int maxIter) {
+        for (int i = 0; i < maxIter; i++) {
+            if (floorStates[y - 1][x - 1] < requiredChangeCount) {
+                floorStates[y - 1][x - 1]++;
+                floorCount++;
+            }
         }
     }
     

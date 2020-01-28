@@ -10,6 +10,11 @@ import static br.ol.qbert.infra.ScoreInfo.*;
 /**
  * Slick class.
  * 
+ * Changes the cubes he hops on back to their original color.
+ * 
+ * Reference:
+ * https://fontsinuse.com/uses/29256/qbert
+ * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
 public class Slick extends Harmless {
@@ -66,7 +71,7 @@ public class Slick extends Harmless {
 
     @Override
     public void onStepOnPlayfield() {
-        playField.restoreFloor(location[0] >> 4, location[1] >> 4);
+        playField.restoreFloor(location[0] >> 4, location[1] >> 4, 2);
     }    
 
     public boolean keepDead() {

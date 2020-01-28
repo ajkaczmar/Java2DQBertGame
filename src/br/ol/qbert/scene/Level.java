@@ -295,6 +295,16 @@ public class Level extends Scene {
             ((Actor) entity).kill(false);
         });
     }
+
+    public void killAllCreaturesExceptCoilyAndGreenBall() {
+        for (Entity entity : entities) {
+            if (!entity.equals(coily) && !entity.equals(ballGreen) && 
+                (entity instanceof Enemy || entity instanceof Harmless)) {
+                
+                ((Actor) entity).kill(false);
+            }
+        }
+    }
     
     private void updateQBertDead() {
         deadWaitTime--;
