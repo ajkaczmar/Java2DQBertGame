@@ -41,7 +41,7 @@ public class Actor extends Entity {
     public int[] target = new int[3];
 
     protected int jumpCount = 0;
-    protected int jumpWaitUntil = 24;
+    protected int jumpWaitUntil = 18;
     
     protected int spx = 0;
     protected int spy = 0;
@@ -111,6 +111,14 @@ public class Actor extends Entity {
         this.currentFrame = currentFrame;
     }
 
+    public int getJumpWaitUntil() {
+        return jumpWaitUntil;
+    }
+
+    public void setJumpWaitUntil(int jumpWaitUntil) {
+        this.jumpWaitUntil = jumpWaitUntil;
+    }
+
     @Override
     public void update() {
         switch (state) {
@@ -167,7 +175,7 @@ public class Actor extends Entity {
         if (location[zIndex] < target[zIndex]) {
             location[zIndex] = target[zIndex];
             currentFrame &= 0xfffffffe; 
-            sleep(30, State.IDLE);
+            sleep(15, State.IDLE);
         }
     }
     

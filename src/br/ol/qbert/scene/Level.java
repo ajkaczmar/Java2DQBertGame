@@ -128,9 +128,24 @@ public class Level extends Scene {
         if (!LevelInfo.isCharacterAvailable(MASK_DISC_4)) {
             flyingDisc4.kill(false);
         }
-        killAllEnemiesAndHarmless();
+        killAllCreatures();
         update();
         hud.refresh();
+        setAllCreaturesSpeed();
+    }
+    
+    private void setAllCreaturesSpeed() {
+        double f = (4 * (LevelInfo.level - 1) + (LevelInfo.round - 1)) / 35.0;
+        // 30~40 = seems to be a nice speed for levels 1-9
+        int speed = 30 + (int) (10 * (1.0 - f));
+        //System.out.println("level " + LevelInfo.level + " speed: " + speed);
+        
+        for (Entity entity : entities) {
+            if (!entity.equals(qbert) && entity instanceof Actor) {
+                Actor actor = (Actor) entity;
+                actor.setJumpWaitUntil(speed);
+            }
+        }
     }
     
     private void addAllEntities() {
@@ -208,7 +223,7 @@ public class Level extends Scene {
         }
         
         if (playField.isGameCleared()) {
-            killAllEnemiesAndHarmless();
+            killAllCreatures();
             playField.blink();
             gameCleared = true;
             gameClearedTime = 200;
@@ -221,7 +236,7 @@ public class Level extends Scene {
         }
         else {
             updateAllEntities();
-            spawnNewActors();
+            spawnNewCreatures();
             checkCollisions();
             checkQBertDead();
         }        
@@ -273,7 +288,7 @@ public class Level extends Scene {
         }
     }
     
-    private void killAllEnemiesAndHarmless() {
+    private void killAllCreatures() {
         entities.stream().filter((entity) -> (entity instanceof Enemy || 
             entity instanceof Harmless)).forEachOrdered((entity) -> {
                 
@@ -300,7 +315,7 @@ public class Level extends Scene {
                 HudInfo.lives--;
                 baloon.setVisible(false);
                 qbert.reset();
-                killAllEnemiesAndHarmless();
+                killAllCreatures();
             }
         }
     }
@@ -320,7 +335,7 @@ public class Level extends Scene {
         }
     }
     
-    private void spawnNewActors() {
+    private void spawnNewCreatures() {
         spawnActorWait--;
         if (spawnActorWait <= 0) {
             
