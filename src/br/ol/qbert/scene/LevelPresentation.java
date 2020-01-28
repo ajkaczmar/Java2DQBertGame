@@ -75,13 +75,18 @@ public class LevelPresentation extends Scene {
     }
 
     @Override
+    public void onEnter() {
+        Audio.playMusic("start_level");
+    }
+    
+    @Override
     public void update() {
         frames++;
         playField.update();
         qbert.update();
-        blinkLevel = frames > 45 || (((frames >> 3) & 1) == 0);
+        blinkLevel = frames > 70 || (((frames >> 3) & 1) == 0);
         boolean jumped = false;
-        int stepIndex = frames - 45;
+        int stepIndex = frames - 100;
         if (!stepsFinished && stepIndex >= 0 && (stepIndex % 20) == 0) {
             stepIndex = stepIndex / 20;
             int level = (LevelInfo.level > 4 ? 4 : LevelInfo.level) - 1;

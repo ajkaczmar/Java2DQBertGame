@@ -62,15 +62,10 @@ public class Title extends Scene {
     }
     
     @Override
-    public void onEnter() {
-        Audio.playMusic("title");
-    }
-
-    @Override
     public void update() {
-        pressSpaceVisible = ((frames++ >> 3) & 3) > 0 && frames > 70;
-        if (frames > 70 && Keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
-            Audio.playSound("level_start");
+        pressSpaceVisible = ((frames++ >> 3) & 3) > 0 && frames > 8;
+        if (frames > 8 && Keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
+            Audio.playSound("coin");
             HudInfo.reset();
             sceneManager.changeScene(SCENE_LEVEL_PRESENTATION, 70);
             return;
